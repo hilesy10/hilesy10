@@ -1,0 +1,1156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lizzie — Product Manager</title>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=Bricolage+Grotesque:opsz,wght@12..96,300;12..96,400;12..96,500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #FFFBF4;
+      --ink: #181818;
+      --coral: #FF4F37;
+      --yellow: #FFE155;
+      --mint: #00C9A7;
+      --lavender: #C4B5FD;
+      --muted: #666;
+      color-scheme: light;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--ink);
+      font-family: 'Bricolage Grotesque', 'Georgia', sans-serif;
+      font-size: 16px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── TOP STRIPE ── */
+    .top-stripe {
+      background: var(--ink);
+      color: var(--yellow);
+      text-align: center;
+      padding: 0.5rem;
+      font-size: 0.78rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      font-weight: 500;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.1rem 3rem;
+      background: var(--bg);
+      border-bottom: 2px solid var(--ink);
+    }
+
+    .nav-logo {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.3rem;
+      font-weight: 800;
+      text-decoration: none;
+      color: var(--ink);
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .nav-dot {
+      width: 8px;
+      height: 8px;
+      background: var(--coral);
+      border-radius: 50%;
+      display: inline-block;
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.6; transform: scale(0.8); }
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--ink);
+      font-size: 0.85rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      position: relative;
+      transition: color 0.2s;
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -2px; left: 0;
+      width: 0; height: 2px;
+      background: var(--coral);
+      transition: width 0.25s;
+    }
+
+    .nav-links a:hover { color: var(--coral); }
+    .nav-links a:hover::after { width: 100%; }
+
+    /* ── SECTION BASE ── */
+    .section-wrap {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 6rem 3rem;
+    }
+
+    .section-label {
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--coral);
+      margin-bottom: 1.2rem;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    .section-label::before {
+      content: '';
+      display: inline-block;
+      width: 1.8rem;
+      height: 2px;
+      background: var(--coral);
+      flex-shrink: 0;
+    }
+
+    .section-label.light { color: var(--yellow); }
+    .section-label.light::before { background: var(--yellow); }
+
+    /* ── ABOUT ── */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1.3fr 0.7fr;
+      gap: 5rem;
+      align-items: start;
+      margin-top: 0.5rem;
+    }
+
+    .about-headline {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(2.4rem, 5vw, 4rem);
+      font-weight: 800;
+      line-height: 1.1;
+      margin-bottom: 2rem;
+      letter-spacing: -0.02em;
+    }
+
+    .about-headline em {
+      font-style: normal;
+      color: var(--coral);
+      position: relative;
+    }
+
+    .about-headline em::after {
+      content: '';
+      position: absolute;
+      bottom: 4px; left: 0;
+      width: 100%; height: 4px;
+      background: var(--yellow);
+      z-index: -1;
+    }
+
+    .about-text {
+      font-size: 1.05rem;
+      line-height: 1.85;
+      color: #444;
+      margin-bottom: 1.5rem;
+    }
+
+    .about-sidebar {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      position: sticky;
+      top: 6rem;
+    }
+
+    .fact-card {
+      border: 2px solid var(--ink);
+      border-radius: 1.25rem;
+      padding: 1.5rem;
+      box-shadow: 4px 4px 0 0 #181818;
+    }
+
+    .fact-card.y { background: var(--yellow); }
+    .fact-card.m { background: var(--mint); }
+    .fact-card.l { background: var(--lavender); }
+
+    .fact-card h3 {
+      font-family: 'Syne', sans-serif;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      margin-bottom: 0.4rem;
+      opacity: 0.6;
+    }
+
+    .fact-card p {
+      font-size: 0.95rem;
+      font-weight: 500;
+    }
+
+    /* ── DIVIDER ── */
+    .divider {
+      border: none;
+      border-top: 2px solid var(--ink);
+      margin: 0 3rem;
+    }
+
+    /* ── WORK ── */
+    .work-header { margin-bottom: 3rem; }
+
+    .work-header h2 {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      font-weight: 800;
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+    }
+
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .project-card {
+      border: 2px solid var(--ink);
+      border-radius: 1.25rem;
+      padding: 2rem 2rem 2.2rem;
+      background: #FFFFFF;
+      color: #181818;
+      cursor: pointer;
+      transition: transform 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+      position: relative;
+      box-shadow: 4px 4px 0 0 #181818;
+    }
+
+    .project-card:hover { transform: translate(-4px, -4px); box-shadow: 8px 8px 0 0 #181818; }
+    .project-card:hover::after { display: none; }
+
+    .project-card.hover-yellow:hover { background: var(--yellow); }
+    .project-card.hover-mint:hover   { background: var(--mint); }
+
+    .project-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 1.2rem;
+    }
+
+    .project-tag {
+      display: inline-block;
+      font-size: 0.68rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      font-weight: 700;
+      border-radius: 2rem;
+      padding: 0.3rem 0.8rem;
+    }
+
+    .tag-coral   { background: var(--coral); color: white; }
+    .tag-mint    { background: var(--mint); color: var(--ink); }
+
+    .project-arrow {
+      font-size: 1.5rem;
+      line-height: 1;
+      color: var(--coral);
+      font-weight: 300;
+    }
+
+    .project-card h3 {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.25rem;
+      font-weight: 700;
+      margin-bottom: 0.75rem;
+      line-height: 1.3;
+      color: #181818;
+    }
+
+    .project-card p {
+      font-size: 0.92rem;
+      line-height: 1.75;
+      color: #555555;
+      margin-bottom: 1.5rem;
+    }
+
+    .project-stats {
+      display: flex;
+      gap: 2rem;
+      padding-top: 1rem;
+      border-top: 1.5px solid rgba(0,0,0,0.1);
+      overflow: visible;
+    }
+
+    .stat-value {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.5rem;
+      font-weight: 800;
+      line-height: 1;
+      margin-bottom: 0.2rem;
+      overflow: visible;
+      white-space: nowrap;
+      color: #181818;
+    }
+
+    .stat-label {
+      font-size: 0.7rem;
+      color: #888888;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    /* ── SKILLS ── */
+    .skills-band { background: var(--ink); color: white; }
+
+    .skills-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 6rem 3rem;
+    }
+
+    .skills-header h2 {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 800;
+      margin-bottom: 3rem;
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+    }
+
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 3rem;
+    }
+
+    .skill-group h4 {
+      font-family: 'Syne', sans-serif;
+      font-size: 0.72rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--yellow);
+      margin-bottom: 1rem;
+    }
+
+    .pill-group { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+
+    .pill {
+      border: 1.5px solid rgba(255,255,255,0.2);
+      border-radius: 2rem;
+      padding: 0.4rem 1rem;
+      font-size: 0.83rem;
+      color: rgba(255,255,255,0.75);
+      transition: all 0.2s;
+      cursor: default;
+    }
+
+    .pill:hover {
+      border-color: var(--mint);
+      color: var(--mint);
+      background: rgba(0,201,167,0.08);
+    }
+
+    .pill.strong {
+      border-color: rgba(255,255,255,0.5);
+      color: white;
+      font-weight: 500;
+    }
+
+    /* ── RECOGNITION ── */
+    .recog-list {
+      margin-top: 3rem;
+      padding-top: 2rem;
+      border-top: 1px solid rgba(255,255,255,0.12);
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+    }
+
+    .recog-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.8rem;
+      font-size: 0.9rem;
+      color: rgba(255,255,255,0.65);
+      line-height: 1.5;
+    }
+
+    .recog-item span:first-child { flex-shrink: 0; }
+
+    .recog-item strong {
+      color: rgba(255,255,255,0.9);
+      font-weight: 500;
+    }
+
+    /* ── CONTACT ── */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 5rem;
+      align-items: center;
+    }
+
+    .contact-big {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(2.4rem, 4.5vw, 3.8rem);
+      font-weight: 800;
+      line-height: 1.1;
+      margin-bottom: 1.5rem;
+      letter-spacing: -0.02em;
+    }
+
+    .contact-big span { color: var(--coral); }
+
+    .contact-text {
+      font-size: 1rem;
+      line-height: 1.8;
+      color: #555;
+      margin-bottom: 2rem;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: var(--coral);
+      color: white;
+      border: 2px solid var(--coral);
+      border-radius: 0.75rem;
+      padding: 0.9rem 2rem;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.95rem;
+      transition: all 0.2s;
+      cursor: pointer;
+      font-family: 'Bricolage Grotesque', sans-serif;
+    }
+
+    .btn-primary:hover { background: var(--ink); border-color: var(--ink); }
+
+    .contact-links {
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+    }
+
+    .contact-link {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      font-size: 0.95rem;
+      text-decoration: none;
+      color: var(--ink);
+      border: 2px solid var(--ink);
+      border-radius: 0.9rem;
+      padding: 1rem 1.4rem;
+      transition: all 0.2s;
+      font-weight: 500;
+    }
+
+    .contact-link .link-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: var(--yellow);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.85rem;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    .contact-link:hover { background: var(--coral); border-color: var(--coral); color: white; }
+    .contact-link:hover .link-icon { background: rgba(255,255,255,0.25); }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 2px solid var(--ink);
+      padding: 1.5rem 3rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.82rem;
+      color: #888;
+    }
+
+    .footer-name {
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      color: var(--ink);
+    }
+
+    /* ── CASE STUDY PAGES ── */
+    .cs-page { display: none; background: var(--bg); min-height: 100vh; }
+
+    .cs-page-nav {
+      position: sticky;
+      top: 0;
+      z-index: 99;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 3rem;
+      background: var(--bg);
+      border-bottom: 2px solid var(--ink);
+    }
+
+    .cs-back-btn {
+      font-family: 'Bricolage Grotesque', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: var(--ink);
+      background: none;
+      border: 2px solid var(--ink);
+      border-radius: 0.6rem;
+      padding: 0.45rem 1rem;
+      cursor: pointer;
+      transition: all 0.2s;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+    }
+
+    .cs-back-btn:hover { background: var(--ink); color: var(--bg); }
+
+    .cs-page-crumb {
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: #999;
+    }
+
+    .cs-page-wrap {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 5rem 3rem 8rem;
+    }
+
+    .cs-pg-kicker {
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--coral);
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    .cs-pg-kicker::before {
+      content: '';
+      display: inline-block;
+      width: 1.8rem;
+      height: 2px;
+      background: var(--coral);
+      flex-shrink: 0;
+    }
+
+    .cs-pg-title {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(2.2rem, 5vw, 3.6rem);
+      font-weight: 800;
+      line-height: 1.08;
+      letter-spacing: -0.025em;
+      color: var(--ink);
+      margin-bottom: 1.2rem;
+    }
+
+    .cs-pg-lead {
+      font-size: 1.1rem;
+      line-height: 1.8;
+      color: #444;
+      border-left: 4px solid var(--coral);
+      padding-left: 1.2rem;
+      margin-bottom: 3rem;
+      font-weight: 300;
+    }
+
+    .cs-metrics-row {
+      display: flex;
+      gap: 3rem;
+      flex-wrap: wrap;
+      padding: 2rem 0;
+      border-top: 2px solid var(--ink);
+      border-bottom: 2px solid var(--ink);
+      margin-bottom: 3.5rem;
+    }
+
+    .cs-metric-num {
+      font-family: 'Syne', sans-serif;
+      font-size: 2.6rem;
+      font-weight: 800;
+      line-height: 1;
+      color: var(--coral);
+      margin-bottom: 0.3rem;
+    }
+
+    .cs-metric-label {
+      font-size: 0.78rem;
+      color: #888;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      line-height: 1.4;
+    }
+
+    .cs-pg-h3 {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--ink);
+      margin-bottom: 0.75rem;
+      margin-top: 2.5rem;
+    }
+
+    .cs-pg-h3:first-of-type { margin-top: 0; }
+
+    .cs-pg-p {
+      font-size: 0.95rem;
+      color: #444;
+      line-height: 1.85;
+      margin-bottom: 0.8rem;
+    }
+
+    .cs-pg-ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.55rem;
+      margin-bottom: 0.8rem;
+    }
+
+    .cs-pg-ul li {
+      font-size: 0.95rem;
+      color: #444;
+      line-height: 1.65;
+      padding-left: 1.2rem;
+      position: relative;
+    }
+
+    .cs-pg-ul li::before {
+      content: '→';
+      position: absolute;
+      left: 0;
+      color: var(--coral);
+      font-size: 0.75rem;
+      top: 3px;
+    }
+
+    .cs-pg-ul li strong { color: var(--ink); font-weight: 600; }
+
+    .cs-rule {
+      border: none;
+      border-top: 1.5px solid rgba(0,0,0,0.1);
+      margin: 2.5rem 0;
+    }
+
+    .cs-outcomes-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.8rem;
+      margin: 1.5rem 0;
+    }
+
+    .cs-outcome {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.6rem;
+      padding: 1rem;
+      border: 1.5px solid var(--ink);
+      border-radius: 0.75rem;
+      background: white;
+    }
+
+    .cs-outcome-tick {
+      color: var(--coral);
+      font-weight: 700;
+      font-size: 0.9rem;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    .cs-outcome-text {
+      font-size: 0.88rem;
+      color: #444;
+      line-height: 1.5;
+    }
+
+    .cs-pg-recog {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-size: 0.9rem;
+      color: #555;
+      font-style: italic;
+      padding: 1.2rem 0;
+      border-top: 2px solid var(--ink);
+      margin-top: 2rem;
+    }
+
+    .cs-pg-credits {
+      font-size: 0.8rem;
+      color: #999;
+      padding: 0.8rem 0;
+      border-top: 1.5px solid rgba(0,0,0,0.1);
+    }
+
+    .cs-pg-credits span { color: #555; }
+
+    .cs-pg-back-bottom {
+      padding: 1.5rem 0;
+      border-top: 1.5px solid rgba(0,0,0,0.1);
+      margin-top: 1rem;
+    }
+
+    /* ── SCROLL REVEAL ── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.65s ease, transform 0.65s ease;
+    }
+
+    .reveal.visible { opacity: 1; transform: none; }
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      .about-grid, .contact-grid { grid-template-columns: 1fr; gap: 3rem; }
+      .skills-grid { grid-template-columns: 1fr 1fr; gap: 2rem; }
+      .about-sidebar { position: static; }
+      .cs-outcomes-grid { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 640px) {
+      nav, .cs-page-nav { padding: 1rem 1.5rem; }
+      .nav-links { gap: 1.2rem; }
+      .nav-links a { font-size: 0.75rem; }
+      .section-wrap { padding: 4rem 1.5rem; }
+      .divider { margin: 0 1.5rem; }
+      .skills-inner { padding: 4rem 1.5rem; }
+      .cs-page-wrap { padding: 3rem 1.5rem 5rem; }
+      footer { padding: 1.5rem; flex-direction: column; gap: 0.5rem; text-align: center; }
+      .skills-grid { grid-template-columns: 1fr; }
+      .cs-metrics-row { gap: 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- TOP STRIPE -->
+<div class="top-stripe">✦ Product Manager · Open to new opportunities ✦</div>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">
+    <span class="nav-dot"></span>
+    Lizzie
+  </a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#work">Work</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- MAIN CONTENT -->
+<div id="main">
+
+  <!-- ── ABOUT ── -->
+  <div class="section-wrap" id="about">
+    <div class="section-label">About me</div>
+    <div class="about-grid">
+      <div>
+        <h1 class="about-headline">
+          Hi, I'm Lizzie.
+        </h1>
+        <p class="about-text">
+          I've spent over a decade in tech, starting out in QA engineering before finding my way into Product Management. Most of my career has been in consumer-facing products — at ASOS and The Body Coach — focused on keeping users engaged and coming back.
+        </p>
+        <p class="about-text">
+          Good UX and design are a big part of why that works, and it's something I care deeply about. I'm based in East London and looking for my next thing.
+        </p>
+        <a href="#work" class="btn-primary">See my work →</a>
+      </div>
+      <div class="about-sidebar">
+        <div class="fact-card y reveal">
+          <h3>Currently</h3>
+          <p>Open to new opportunities</p>
+        </div>
+        <div class="fact-card m reveal reveal-delay-1">
+          <h3>Based in</h3>
+          <p>East London</p>
+        </div>
+        <div class="fact-card l reveal reveal-delay-2">
+          <h3>Specialises in</h3>
+          <p>Retention · Loyalty · Consumer apps · E-commerce</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- ── WORK ── -->
+  <div class="section-wrap" id="work">
+    <div class="work-header">
+      <div class="section-label">Case studies</div>
+      <h2>Things I've shipped<br>&amp; the results that followed.</h2>
+    </div>
+    <div class="projects-grid">
+
+      <div class="project-card hover-yellow reveal" onclick="openCase('size')">
+        <div class="project-top">
+          <span class="project-tag tag-coral">Internal tooling</span>
+          <span class="project-arrow">↗</span>
+        </div>
+        <h3>Size Management Tool Rebuild</h3>
+        <p>Rebuilt ASOS's internal size management tooling to fix systemic data integrity issues across international markets — eliminating incorrect sizing shown to customers and dramatically cutting manual effort.</p>
+        <div class="project-stats">
+          <div>
+            <div class="stat-value">83%</div>
+            <div class="stat-label">Ops effort reduced</div>
+          </div>
+          <div>
+            <div class="stat-value">🏆</div>
+            <div class="stat-label">ASOS Aces award</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-card hover-mint reveal reveal-delay-1" onclick="openCase('btl')">
+        <div class="project-top">
+          <span class="project-tag tag-mint">Customer experience</span>
+          <span class="project-arrow">↗</span>
+        </div>
+        <h3>Buy the Look</h3>
+        <p>Enabled customers to shop complete outfits directly from product pages across web and mobile. Validated through a carefully designed A/B test with a balanced metric set.</p>
+        <div class="project-stats">
+          <div>
+            <div class="stat-value">60–70%</div>
+            <div class="stat-label">Basket size increase</div>
+          </div>
+          <div>
+            <div class="stat-value">🏆</div>
+            <div class="stat-label">Drapers nominee</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- ── SKILLS ── -->
+  <div class="skills-band" id="skills">
+    <div class="skills-inner">
+      <div class="section-label light">Skills &amp; experience</div>
+      <div class="skills-header">
+        <h2>What I bring<br>to the table.</h2>
+      </div>
+      <div class="skills-grid">
+        <div class="skill-group reveal">
+          <h4>Product craft</h4>
+          <div class="pill-group">
+            <span class="pill strong">Discovery &amp; research</span>
+            <span class="pill strong">Retention strategy</span>
+            <span class="pill strong">Loyalty design</span>
+            <span class="pill">Roadmapping</span>
+            <span class="pill">User story writing</span>
+            <span class="pill">Jobs to be done</span>
+            <span class="pill">A/B testing</span>
+            <span class="pill">Data analysis</span>
+            <span class="pill">OKR setting</span>
+            <span class="pill">Go-to-market</span>
+          </div>
+        </div>
+        <div class="skill-group reveal reveal-delay-1">
+          <h4>Ways of working</h4>
+          <div class="pill-group">
+            <span class="pill">Agile / Scrum</span>
+            <span class="pill">Sprint planning</span>
+            <span class="pill">Stakeholder management</span>
+            <span class="pill">Cross-functional delivery</span>
+            <span class="pill">Figma</span>
+            <span class="pill">Jira</span>
+            <span class="pill">Notion</span>
+            <span class="pill">UX / UI (in training)</span>
+          </div>
+        </div>
+        <div class="skill-group reveal reveal-delay-2">
+          <h4>Domain expertise</h4>
+          <div class="pill-group">
+            <span class="pill strong">E-commerce</span>
+            <span class="pill strong">Consumer apps</span>
+            <span class="pill">Health &amp; fitness</span>
+            <span class="pill">Community platforms</span>
+            <span class="pill">Internal tooling</span>
+            <span class="pill">QA &amp; testing</span>
+          </div>
+        </div>
+      </div>
+      <div class="recog-list">
+        <div class="recog-item">
+          <span>🏆</span>
+          <span><strong>ASOS Aces — Customer Champion</strong> · Internal recognition for customer-first thinking</span>
+        </div>
+        <div class="recog-item">
+          <span>🏆</span>
+          <span><strong>Drapers Awards Finalist — Tech Innovator of the Year</strong> · Industry recognition for Buy the Look</span>
+        </div>
+        <div class="recog-item">
+          <span>📚</span>
+          <span><strong>Currently completing a UX/UI course</strong> · Adding design thinking and prototyping to the toolkit</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── CONTACT ── -->
+  <div class="section-wrap" id="contact">
+    <div class="contact-grid">
+      <div class="reveal">
+        <div class="section-label">Get in touch</div>
+        <h2 class="contact-big">
+          Let's make something<br>
+          <span>great</span> together.
+        </h2>
+        <p class="contact-text">
+          Open to Senior PM roles in e-commerce, consumer apps, and loyalty. Based in East London, open to hybrid. Drop me a line — I don't bite.
+        </p>
+        <a href="mailto:your@email.com" class="btn-primary">Say hello →</a>
+      </div>
+      <div class="contact-links reveal reveal-delay-1">
+        <a href="mailto:your@email.com" class="contact-link">
+          <div class="link-icon">@</div>
+          your@email.com
+        </a>
+        <a href="https://linkedin.com/in/yourprofile" class="contact-link" target="_blank">
+          <div class="link-icon">in</div>
+          LinkedIn
+        </a>
+        <a href="lizzie-cv.pdf" class="contact-link" download>
+          <div class="link-icon">↓</div>
+          Download my CV
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <span class="footer-name">Lizzie ✦</span>
+    <span>Designed &amp; built by me · 2026</span>
+  </footer>
+
+</div><!-- /main -->
+
+<!-- ══ CASE STUDY: SIZE MANAGEMENT ══ -->
+<div id="case-size" class="cs-page">
+  <div class="cs-page-nav">
+    <button class="cs-back-btn" onclick="closeCase()">← Back</button>
+    <span class="cs-page-crumb">Case study 01 / 02</span>
+  </div>
+  <div class="cs-page-wrap">
+    <div class="cs-pg-kicker">ASOS · Internal Tooling · 2024</div>
+    <h2 class="cs-pg-title">Size Management Tool Rebuild</h2>
+    <p class="cs-pg-lead">Rebuilt ASOS's internal size management tooling to address systemic data integrity issues across international markets. Reduced operational effort by 83% and established a reliable foundation for accurate sizing at scale.</p>
+
+    <div class="cs-metrics-row">
+      <div><div class="cs-metric-num">83%</div><div class="cs-metric-label">Reduction in operational effort</div></div>
+      <div><div class="cs-metric-num">6 mo</div><div class="cs-metric-label">End-to-end discovery &amp; delivery</div></div>
+      <div><div class="cs-metric-num">12</div><div class="cs-metric-label">Markets affected by incorrect sizing</div></div>
+    </div>
+
+    <h3 class="cs-pg-h3">The problem</h3>
+    <p class="cs-pg-p">ASOS operates across thousands of brands and international markets, each with different sizing conventions, resulting in tens of thousands of size groups to manage.</p>
+    <p class="cs-pg-p">The internal tooling used by merchandising teams had evolved organically and was no longer fit for purpose. Teams relied on manual workarounds, and underlying size data had become increasingly unreliable across large parts of the catalogue.</p>
+    <p class="cs-pg-p">This had clear customer impact. Across 12 markets, customers were often shown incorrect sizing (e.g. US sizes in Germany) with no way to interpret them — creating risk for both conversion and returns.</p>
+
+    <hr class="cs-rule">
+
+    <h3 class="cs-pg-h3">My role</h3>
+    <p class="cs-pg-p">Product Manager, responsible for end-to-end discovery and delivery over a 6-month period.</p>
+    <ul class="cs-pg-ul">
+      <li>Led discovery across users, processes, and technical systems</li>
+      <li>Defined product direction and secured senior stakeholder alignment</li>
+      <li>Owned delivery in close collaboration with engineering</li>
+      <li>Managed cross-functional stakeholders across merchandising, garment tech, and transformation teams</li>
+    </ul>
+
+    <hr class="cs-rule">
+
+    <h3 class="cs-pg-h3">Approach</h3>
+    <p class="cs-pg-p" style="font-weight:500; color:#181818; margin-bottom:0.4rem;">Discovery &amp; Reframing</p>
+    <ul class="cs-pg-ul">
+      <li>Conducted user interviews and process mapping to identify operational pain points</li>
+      <li>Partnered with engineering to uncover technical constraints and data issues</li>
+      <li>Identified data integrity as the root cause and redefined the problem accordingly</li>
+    </ul>
+    <p class="cs-pg-p" style="font-weight:500; color:#181818; margin-bottom:0.4rem; margin-top:1rem;">Delivery &amp; Execution</p>
+    <ul class="cs-pg-ul">
+      <li>Worked closely with engineering on solution design, balancing scalability with delivery timelines</li>
+      <li>Defined scope, wrote specifications, and led sprint ceremonies</li>
+      <li>Maintained alignment through regular stakeholder updates and clear trade-off decisions</li>
+    </ul>
+    <p class="cs-pg-p" style="font-weight:500; color:#181818; margin-bottom:0.4rem; margin-top:1rem;">Launch &amp; Rollout</p>
+    <ul class="cs-pg-ul">
+      <li>Owned testing strategy in the absence of dedicated QA</li>
+      <li>Led UAT with business stakeholders</li>
+      <li>Delivered a phased rollout to minimise risk and drive adoption</li>
+      <li>Monitored performance post-launch and iterated based on feedback</li>
+    </ul>
+
+    <hr class="cs-rule">
+
+    <h3 class="cs-pg-h3">Key decisions &amp; trade-offs</h3>
+    <ul class="cs-pg-ul">
+      <li><strong>Foundation vs quick wins:</strong> Prioritised fixing data integrity over adding surface-level features</li>
+      <li><strong>Scope vs speed:</strong> Used a phased rollout to balance delivery pace with stability</li>
+      <li><strong>Scalability vs usability:</strong> Ensured the solution worked at scale while remaining usable for non-technical teams</li>
+    </ul>
+
+    <h3 class="cs-pg-h3">Outcome</h3>
+    <div class="cs-outcomes-grid">
+      <div class="cs-outcome"><span class="cs-outcome-tick">✓</span><span class="cs-outcome-text">Reduced manual operational effort by 83%</span></div>
+      <div class="cs-outcome"><span class="cs-outcome-tick">✓</span><span class="cs-outcome-text">Restored trust in size data across international markets</span></div>
+      <div class="cs-outcome"><span class="cs-outcome-tick">✓</span><span class="cs-outcome-text">Enabled a consistent and accurate sizing experience at scale</span></div>
+      <div class="cs-outcome"><span class="cs-outcome-tick">✓</span><span class="cs-outcome-text">Created a foundation for improving conversion and reducing size-related returns</span></div>
+    </div>
+
+    <div class="cs-pg-recog">🏆 Awarded the ASOS Aces Customer Champion award</div>
+    <div class="cs-pg-credits">Credits: <span>Louise Stone &amp; Maisie Vines, Business Transformation · Soundar Anbalagan, Lead Engineer</span></div>
+    <div class="cs-pg-back-bottom"><button class="cs-back-btn" onclick="closeCase()">← Back to work</button></div>
+  </div>
+</div>
+
+<!-- ══ CASE STUDY: BUY THE LOOK ══ -->
+<div id="case-btl" class="cs-page">
+  <div class="cs-page-nav">
+    <button class="cs-back-btn" onclick="closeCase()">← Back</button>
+    <span class="cs-page-crumb">Case study 02 / 02</span>
+  </div>
+  <div class="cs-page-wrap">
+    <div class="cs-pg-kicker">ASOS · Customer Experience · 2024</div>
+    <h2 class="cs-pg-title">Buy The Look</h2>
+    <p class="cs-pg-lead">Delivered the 'Buy The Look' feature across web and mobile web, enabling customers to shop complete outfits directly from product pages. Increased average basket size by 60–70%, unlocking a significant cross-sell opportunity.</p>
+
+    <div class="cs-metrics-row">
+      <div><div class="cs-metric-num">60–70%</div><div class="cs-metric-label">Increase in average basket size</div></div>
+      <div><div class="cs-metric-num">100%</div><div class="cs-metric-label">Rolled out to all users</div></div>
+    </div>
+
+    <h3 class="cs-pg-h3">The problem</h3>
+    <p class="cs-pg-p">Customer research consistently highlighted a gap in the PDP experience. Users would find an item they liked, but struggled to discover and purchase the rest of the outfit.</p>
+    <p class="cs-pg-p">This created a disconnect between inspiration and purchase, limiting both user experience and commercial potential.</p>
+    <p class="cs-pg-p">At the same time, enabling this experience introduced operational complexity. The Studios team worked to tight production timelines, and identifying additional products worn by models required manual effort, creating tension between customer value and operational cost.</p>
+
+    <hr class="cs-rule">
+
+    <h3 class="cs-pg-h3">My role</h3>
+    <p class="cs-pg-p">Product Manager, leading the web experience while supporting the Lead PM on overall strategy and delivery.</p>
+    <ul class="cs-pg-ul">
+      <li>Led product direction and delivery for web and mobile web</li>
+      <li>Owned discovery and user validation for the experience</li>
+      <li>Worked closely with engineering on implementation and rollout</li>
+      <li>Managed stakeholders across Studios, engineering, and transformation teams</li>
+    </ul>
+
+    <hr class="cs-rule">
+
+    <h3 class="cs-pg-h3">Approach</h3>
+    <p class="cs-pg-p" style="font-weight:500; color:#181818; margin-bottom:0.4rem;">Discovery &amp; Opportunity Framing</p>
+    <ul class="cs-pg-ul">
+      <li>Conducted user research to validate the discovery gap on PDPs</li>
+      <li>Identified a clear opportunity to improve outfit discoverability and increase basket size</li>
+      <li>Partnered with Studios to understand operational constraints and workflow impact</li>
+    </ul>
+    <p class="cs-pg-p" style="font-weight:500; color:#181818; margin-bottom:0.4rem; margin-top:1rem;">Delivery &amp; Execution</p>
+    <ul class="cs-pg-ul">
+      <li>Worked closely with engineering to design a scalable solution across web and mobile</li>
+      <li>Defined scope, wrote specifications, and led sprint ceremonies</li>
+      <li>Balanced user experience improvements with operational feasibility</li>
+    </ul>
+    <p class="cs-pg-p" style="font-weight:500; color:#181818; margin-bottom:0.4rem; margin-top:1rem;">Experimentation &amp; Rollout</p>
+    <ul class="cs-pg-ul">
+      <li>Delivered a phased rollout to minimise risk</li>
+      <li>Designed and ran an A/B test to measure impact</li>
+      <li>Defined a balanced metric set to evaluate success: Engagement (interaction with the module), Add-to-bag behaviour, Basket size (primary commercial metric)</li>
+      <li>Used this to avoid over-optimising for a single metric and ensure meaningful impact</li>
+    </ul>
+
+    <hr class="cs-rule">
+
+    <h3 class="cs-pg-h3">Key decisions &amp; trade-offs</h3>
+    <ul class="cs-pg-ul">
+      <li><strong>Customer value vs operational cost:</strong> Introducing the feature required additional manual effort from Studios to tag products</li>
+      <li><strong>ROI vs scale:</strong> Used experimentation to validate whether the commercial impact justified the operational investment</li>
+      <li><strong>Experience vs feasibility:</strong> Aligned closely with teams to ensure the solution fit within existing workflows without slowing production</li>
+    </ul>
+
+    <h3 class="cs-pg-h3">Outcome</h3>
+    <div class="cs-outcomes-grid">
+      <div class="cs-outcome"><span class="cs-outcome-tick">✓</span><span class="cs-outcome-text">Increased average basket size by 60–70%, significantly exceeding projections</span></div>
+      <div class="cs-outcome"><span class="cs-outcome-tick">✓</span><span class="cs-outcome-text">Validated a scalable cross-sell opportunity within the PDP experience</span></div>
+      <div class="cs-outcome"><span class="cs-outcome-tick">✓</span><span class="cs-outcome-text">Provided the confidence to roll out to 100% of users and invest in further development</span></div>
+    </div>
+
+    <div class="cs-pg-recog">🏆 Nominated as part of the ASOS team for Tech Innovator of the Year at the Drapers Awards (2024)</div>
+    <div class="cs-pg-credits">Credits: <span>Alexis Andronikou (Lead Product Manager), Tom Pereira, Dan Lee, Scarlett Dennison, Dominic Jomaa (Engineers)</span></div>
+    <div class="cs-pg-back-bottom"><button class="cs-back-btn" onclick="closeCase()">← Back to work</button></div>
+  </div>
+</div>
+
+<script>
+  function openCase(id) {
+    document.getElementById('main').style.display = 'none';
+    document.getElementById('case-' + id).style.display = 'block';
+    window.scrollTo(0, 0);
+  }
+
+  function closeCase() {
+    document.querySelectorAll('.cs-page').forEach(p => p.style.display = 'none');
+    document.getElementById('main').style.display = 'block';
+    setTimeout(() => document.getElementById('work').scrollIntoView({ behavior: 'smooth' }), 50);
+  }
+
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); }
+    });
+  }, { threshold: 0.12 });
+  reveals.forEach(r => observer.observe(r));
+</script>
+
+</body>
+</html>
