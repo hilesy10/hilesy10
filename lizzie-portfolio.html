@@ -1,0 +1,793 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lizzie — Product Manager</title>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=Bricolage+Grotesque:opsz,wght@12..96,300;12..96,400;12..96,500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #FFFBF4;
+      --ink: #181818;
+      --coral: #FF4F37;
+      --yellow: #FFE155;
+      --mint: #00C9A7;
+      --lavender: #C4B5FD;
+      --card-bg: #FFF8EE;
+      --muted: #666;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--ink);
+      font-family: 'Bricolage Grotesque', 'Georgia', sans-serif;
+      font-size: 16px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── TOP STRIPE ── */
+    .top-stripe {
+      background: var(--ink);
+      color: var(--yellow);
+      text-align: center;
+      padding: 0.5rem;
+      font-size: 0.78rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      font-weight: 500;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.1rem 3rem;
+      background: var(--bg);
+      border-bottom: 2px solid var(--ink);
+    }
+
+    .nav-logo {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.3rem;
+      font-weight: 800;
+      text-decoration: none;
+      color: var(--ink);
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .nav-dot {
+      width: 8px;
+      height: 8px;
+      background: var(--coral);
+      border-radius: 50%;
+      display: inline-block;
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.6; transform: scale(0.8); }
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--ink);
+      font-size: 0.85rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      position: relative;
+      transition: color 0.2s;
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--coral);
+      transition: width 0.25s;
+    }
+
+    .nav-links a:hover { color: var(--coral); }
+    .nav-links a:hover::after { width: 100%; }
+
+    /* ── SECTION BASE ── */
+    .section-wrap {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 6rem 3rem;
+    }
+
+    .section-label {
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--coral);
+      margin-bottom: 1.2rem;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    .section-label::before {
+      content: '';
+      display: inline-block;
+      width: 1.8rem;
+      height: 2px;
+      background: var(--coral);
+      flex-shrink: 0;
+    }
+
+    .section-label.light { color: var(--yellow); }
+    .section-label.light::before { background: var(--yellow); }
+
+    /* ── ABOUT ── */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1.3fr 0.7fr;
+      gap: 5rem;
+      align-items: start;
+      margin-top: 0.5rem;
+    }
+
+    .about-headline {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(2.4rem, 5vw, 4rem);
+      font-weight: 800;
+      line-height: 1.1;
+      margin-bottom: 2rem;
+      letter-spacing: -0.02em;
+    }
+
+    .about-headline em {
+      font-style: normal;
+      color: var(--coral);
+      position: relative;
+    }
+
+    .about-headline em::after {
+      content: '';
+      position: absolute;
+      bottom: 4px;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: var(--yellow);
+      z-index: -1;
+    }
+
+    .about-text {
+      font-size: 1.05rem;
+      line-height: 1.85;
+      color: #444;
+      margin-bottom: 1.5rem;
+    }
+
+    /* PLACEHOLDER STYLED */
+    .placeholder {
+      background: var(--yellow);
+      border-radius: 0.25rem;
+      padding: 0 0.3rem;
+      color: var(--ink);
+      font-style: italic;
+      font-size: 0.9em;
+    }
+
+    .about-sidebar {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      position: sticky;
+      top: 6rem;
+    }
+
+    .fact-card {
+      border: 2px solid var(--ink);
+      border-radius: 1.25rem;
+      padding: 1.5rem;
+      position: relative;
+    }
+
+    .fact-card::after {
+      content: '';
+      position: absolute;
+      inset: 4px -4px -4px 4px;
+      border: 2px solid var(--ink);
+      border-radius: 1.25rem;
+      z-index: -1;
+      background: var(--ink);
+    }
+
+    .fact-card.y { background: var(--yellow); }
+    .fact-card.m { background: var(--mint); }
+    .fact-card.l { background: var(--lavender); }
+
+    .fact-card h3 {
+      font-family: 'Syne', sans-serif;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      margin-bottom: 0.4rem;
+      opacity: 0.6;
+    }
+
+    .fact-card p {
+      font-size: 0.95rem;
+      font-weight: 500;
+    }
+
+    /* ── DIVIDER ── */
+    .divider {
+      border: none;
+      border-top: 2px solid var(--ink);
+      margin: 0 3rem;
+    }
+
+    /* ── WORK ── */
+    .work-header {
+      margin-bottom: 3rem;
+    }
+
+    .work-header h2 {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      font-weight: 800;
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+    }
+
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .project-card {
+      border: 2px solid var(--ink);
+      border-radius: 1.25rem;
+      padding: 2rem;
+      background: white;
+      cursor: pointer;
+      transition: transform 0.2s ease, background 0.2s ease;
+      position: relative;
+      z-index: 0;
+    }
+
+    .project-card::after {
+      content: '';
+      position: absolute;
+      inset: 4px -4px -4px 4px;
+      border: 2px solid var(--ink);
+      border-radius: 1.25rem;
+      z-index: -1;
+      background: var(--ink);
+      transition: inset 0.2s ease;
+    }
+
+    .project-card:hover {
+      transform: translate(-4px, -4px);
+    }
+
+    .project-card:hover::after {
+      inset: 8px -8px -8px 8px;
+    }
+
+    .project-card.hover-yellow:hover { background: var(--yellow); }
+    .project-card.hover-mint:hover { background: var(--mint); }
+    .project-card.hover-lavender:hover { background: var(--lavender); }
+
+    .project-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 1.2rem;
+    }
+
+    .project-tag {
+      display: inline-block;
+      font-size: 0.68rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      font-weight: 700;
+      border-radius: 2rem;
+      padding: 0.3rem 0.8rem;
+    }
+
+    .tag-coral { background: var(--coral); color: white; }
+    .tag-mint { background: var(--mint); color: var(--ink); }
+    .tag-lavender { background: var(--lavender); color: var(--ink); }
+
+    .project-arrow {
+      font-size: 1.5rem;
+      line-height: 1;
+      color: var(--coral);
+      font-weight: 300;
+    }
+
+    .project-card h3 {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.25rem;
+      font-weight: 700;
+      margin-bottom: 0.75rem;
+      line-height: 1.3;
+    }
+
+    .project-card p {
+      font-size: 0.92rem;
+      line-height: 1.75;
+      color: #555;
+      margin-bottom: 1.5rem;
+    }
+
+    .project-stats {
+      display: flex;
+      gap: 2rem;
+      padding-top: 1rem;
+      border-top: 1.5px solid rgba(0,0,0,0.1);
+    }
+
+    .stat-value {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.6rem;
+      font-weight: 800;
+      line-height: 1;
+      margin-bottom: 0.2rem;
+    }
+
+    .stat-label {
+      font-size: 0.7rem;
+      color: #888;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    /* ── SKILLS ── */
+    .skills-band {
+      background: var(--ink);
+      color: white;
+    }
+
+    .skills-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 6rem 3rem;
+    }
+
+    .skills-header h2 {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 800;
+      margin-bottom: 3rem;
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+    }
+
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 3rem;
+    }
+
+    .skill-group h4 {
+      font-family: 'Syne', sans-serif;
+      font-size: 0.72rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--yellow);
+      margin-bottom: 1rem;
+    }
+
+    .pill-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .pill {
+      border: 1.5px solid rgba(255,255,255,0.2);
+      border-radius: 2rem;
+      padding: 0.4rem 1rem;
+      font-size: 0.83rem;
+      color: rgba(255,255,255,0.75);
+      transition: all 0.2s;
+      cursor: default;
+    }
+
+    .pill:hover {
+      border-color: var(--mint);
+      color: var(--mint);
+      background: rgba(0,201,167,0.08);
+    }
+
+    /* ── CONTACT ── */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 5rem;
+      align-items: center;
+    }
+
+    .contact-big {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(2.4rem, 4.5vw, 3.8rem);
+      font-weight: 800;
+      line-height: 1.1;
+      margin-bottom: 1.5rem;
+      letter-spacing: -0.02em;
+    }
+
+    .contact-big span { color: var(--coral); }
+
+    .contact-text {
+      font-size: 1rem;
+      line-height: 1.8;
+      color: #555;
+      margin-bottom: 2rem;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: var(--coral);
+      color: white;
+      border: 2px solid var(--coral);
+      border-radius: 0.75rem;
+      padding: 0.9rem 2rem;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.95rem;
+      transition: all 0.2s;
+      cursor: pointer;
+    }
+
+    .btn-primary:hover {
+      background: var(--ink);
+      border-color: var(--ink);
+    }
+
+    .contact-links {
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+    }
+
+    .contact-link {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      font-size: 0.95rem;
+      text-decoration: none;
+      color: var(--ink);
+      border: 2px solid var(--ink);
+      border-radius: 0.9rem;
+      padding: 1rem 1.4rem;
+      transition: all 0.2s;
+      font-weight: 500;
+      position: relative;
+    }
+
+    .contact-link .link-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: var(--yellow);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.85rem;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    .contact-link:hover {
+      background: var(--coral);
+      border-color: var(--coral);
+      color: white;
+    }
+
+    .contact-link:hover .link-icon {
+      background: rgba(255,255,255,0.25);
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 2px solid var(--ink);
+      padding: 1.5rem 3rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.82rem;
+      color: #888;
+    }
+
+    .footer-name {
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      color: var(--ink);
+    }
+
+    /* ── SCROLL REVEAL ── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.65s ease, transform 0.65s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: none;
+    }
+
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      .about-grid, .contact-grid { grid-template-columns: 1fr; gap: 3rem; }
+      .skills-grid { grid-template-columns: 1fr 1fr; gap: 2rem; }
+    }
+
+    @media (max-width: 640px) {
+      nav { padding: 1rem 1.5rem; }
+      .nav-links { gap: 1.2rem; }
+      .nav-links a { font-size: 0.75rem; }
+      .section-wrap { padding: 4rem 1.5rem; }
+      .divider { margin: 0 1.5rem; }
+      .skills-inner { padding: 4rem 1.5rem; }
+      footer { padding: 1.5rem; flex-direction: column; gap: 0.5rem; text-align: center; }
+      .skills-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- TOP STRIPE -->
+<div class="top-stripe">✦ Product Manager · Open to new opportunities ✦</div>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">
+    <span class="nav-dot"></span>
+    Lizzie
+  </a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#work">Work</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- ════════════════ ABOUT ════════════════ -->
+<div class="section-wrap" id="about">
+  <div class="section-label">About me</div>
+  <div class="about-grid">
+    <div>
+      <h1 class="about-headline">
+        Hi, I'm Lizzie.<br>
+        I build products<br>
+        <em>people love</em> to use.
+      </h1>
+      <p class="about-text">
+        I'm a Product Manager with a passion for turning complex, messy problems into elegant, user-centred solutions. I believe great products live at the intersection of user needs, business goals, and technical possibility — and I love navigating that space every day.
+      </p>
+      <p class="about-text">
+        Over the years I've shipped products across <span class="placeholder">[your industries]</span>, working with cross-functional teams to take ideas from zero to one and from good to great. I care deeply about the 'why' behind every feature — and I'm never satisfied until the data proves it's working.
+      </p>
+      <a href="#work" class="btn-primary">See my work →</a>
+    </div>
+    <div class="about-sidebar">
+      <div class="fact-card y reveal">
+        <h3>Currently</h3>
+        <p>Senior PM @ <span class="placeholder">[Company]</span> — leading <span class="placeholder">[product area]</span></p>
+      </div>
+      <div class="fact-card m reveal reveal-delay-1">
+        <h3>Based in</h3>
+        <p>London, UK 🌍</p>
+      </div>
+      <div class="fact-card l reveal reveal-delay-2">
+        <h3>Specialises in</h3>
+        <p>0-to-1 product development · B2B SaaS · Growth</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<hr class="divider">
+
+<!-- ════════════════ WORK ════════════════ -->
+<div class="section-wrap" id="work">
+  <div class="work-header">
+    <div class="section-label">Case studies</div>
+    <h2>Things I've shipped<br>& the results that followed.</h2>
+  </div>
+  <div class="projects-grid">
+
+    <div class="project-card hover-yellow reveal">
+      <div class="project-top">
+        <span class="project-tag tag-coral">Growth</span>
+        <span class="project-arrow">↗</span>
+      </div>
+      <h3>Redesigning the onboarding funnel</h3>
+      <p>Led a full rethink of the new user experience — from sign-up to first 'aha' moment — using qualitative interviews, heatmaps, and funnel analytics to surface where users were dropping off.</p>
+      <div class="project-stats">
+        <div>
+          <div class="stat-value">+42%</div>
+          <div class="stat-label">Activation rate</div>
+        </div>
+        <div>
+          <div class="stat-value">−28%</div>
+          <div class="stat-label">Drop-off</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="project-card hover-mint reveal reveal-delay-1">
+      <div class="project-top">
+        <span class="project-tag tag-mint">0 → 1</span>
+        <span class="project-arrow">↗</span>
+      </div>
+      <h3>Launching <span class="placeholder">[Product]</span> from scratch</h3>
+      <p>Owned the end-to-end discovery, definition, and delivery of a new product line — from business case and stakeholder buy-in through to a successful GA launch in just 9 months.</p>
+      <div class="project-stats">
+        <div>
+          <div class="stat-value">£2M</div>
+          <div class="stat-label">ARR in year 1</div>
+        </div>
+        <div>
+          <div class="stat-value">4.7★</div>
+          <div class="stat-label">App Store</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="project-card hover-lavender reveal reveal-delay-2">
+      <div class="project-top">
+        <span class="project-tag tag-lavender">Platform</span>
+        <span class="project-arrow">↗</span>
+      </div>
+      <h3>Self-serve analytics dashboard</h3>
+      <p>Partnered with engineering and data to give customers real-time visibility into their usage — eliminating a key churn driver and reducing support tickets significantly.</p>
+      <div class="project-stats">
+        <div>
+          <div class="stat-value">−18%</div>
+          <div class="stat-label">Churn</div>
+        </div>
+        <div>
+          <div class="stat-value">3× NPS</div>
+          <div class="stat-label">Lift</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<hr class="divider">
+
+<!-- ════════════════ SKILLS ════════════════ -->
+<div class="skills-band" id="skills">
+  <div class="skills-inner">
+    <div class="section-label light">Skills &amp; tools</div>
+    <div class="skills-header">
+      <h2>What I bring<br>to the table.</h2>
+    </div>
+    <div class="skills-grid">
+      <div class="skill-group reveal">
+        <h4>Product craft</h4>
+        <div class="pill-group">
+          <span class="pill">User research</span>
+          <span class="pill">Discovery</span>
+          <span class="pill">Roadmapping</span>
+          <span class="pill">Prioritisation</span>
+          <span class="pill">PRDs</span>
+          <span class="pill">Jobs-to-be-done</span>
+          <span class="pill">A/B testing</span>
+          <span class="pill">Go-to-market</span>
+        </div>
+      </div>
+      <div class="skill-group reveal reveal-delay-1">
+        <h4>Data &amp; analytics</h4>
+        <div class="pill-group">
+          <span class="pill">Mixpanel</span>
+          <span class="pill">Amplitude</span>
+          <span class="pill">SQL</span>
+          <span class="pill">Looker</span>
+          <span class="pill">Funnel analysis</span>
+          <span class="pill">Cohort analysis</span>
+          <span class="pill">Tableau</span>
+        </div>
+      </div>
+      <div class="skill-group reveal reveal-delay-2">
+        <h4>Ways of working</h4>
+        <div class="pill-group">
+          <span class="pill">Agile / Scrum</span>
+          <span class="pill">Stakeholder mgmt</span>
+          <span class="pill">Jira</span>
+          <span class="pill">Figma</span>
+          <span class="pill">Notion</span>
+          <span class="pill">OKRs</span>
+          <span class="pill">Confluence</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════ CONTACT ════════════════ -->
+<div class="section-wrap" id="contact">
+  <div class="contact-grid">
+    <div class="reveal">
+      <div class="section-label">Get in touch</div>
+      <h2 class="contact-big">
+        Let's make something<br>
+        <span>great</span> together.
+      </h2>
+      <p class="contact-text">
+        Open to new opportunities, collaborations, and interesting conversations about product. Drop me a line — I don't bite.
+      </p>
+      <a href="mailto:hello@lizzie.com" class="btn-primary">Say hello →</a>
+    </div>
+    <div class="contact-links reveal reveal-delay-1">
+      <a href="mailto:hello@lizzie.com" class="contact-link">
+        <div class="link-icon">@</div>
+        hello@lizzie.com
+      </a>
+      <a href="https://linkedin.com/in/lizzie" class="contact-link" target="_blank">
+        <div class="link-icon">in</div>
+        LinkedIn — /in/lizzie
+      </a>
+      <a href="lizzie-cv.pdf" class="contact-link" download>
+        <div class="link-icon">↓</div>
+        Download my CV
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <span class="footer-name">Lizzie ✦</span>
+  <span>Designed &amp; built by me · 2025</span>
+</footer>
+
+<script>
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  reveals.forEach(r => observer.observe(r));
+</script>
+
+</body>
+</html>
